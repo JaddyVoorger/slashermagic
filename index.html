@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<title>Slasher Format Whitepaper</title>
+
+<style>
+
+/* ----------- base ----------- */
+
+body{
+margin:0;
+background:#e6e6e6;
+font-family: "Inter", system-ui, -apple-system, sans-serif;
+color:#222;
+}
+
+.document{
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:40px 0;
+gap:40px;
+}
+
+/* ----------- A4 page ----------- */
+
+.page{
+
+width:210mm;
+height:297mm;
+
+padding:30mm 25mm;
+
+background:white;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+
+box-sizing:border-box;
+
+position:relative;
+
+}
+
+/* ----------- header ----------- */
+
+.header{
+position:absolute;
+top:12mm;
+left:25mm;
+right:25mm;
+
+display:flex;
+justify-content:center;
+
+font-size:12px;
+color:#777;
+
+border-bottom:1px solid #ddd;
+padding-bottom:6px;
+}
+
+/* ----------- footer ----------- */
+
+.footer{
+
+position:absolute;
+
+bottom:12mm;
+left:25mm;
+right:25mm;
+
+display:flex;
+justify-content:space-between;
+
+font-size:12px;
+
+color:#777;
+
+border-top:1px solid #ddd;
+padding-top:6px;
+
+}
+
+/* ----------- cover footer ----------- */
+
+.footer2{
+
+position:absolute;
+
+display:flex;
+justify-content:center;
+
+bottom:12mm;
+left:25mm;
+right:25mm;
+
+font-size:12px;
+
+color:#777;
+
+padding-top:6px;
+
+}
+
+/* automatic numbering */
+
+.page-number::after{
+content: counter(page);
+}
+
+body{
+counter-reset:page;
+}
+
+.page{
+counter-increment:page;
+}
+
+/* ----------- cover ----------- */
+
+.cover{
+
+display:flex;
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+text-align:center;
+
+}
+
+.cover h1{
+
+font-size:52px;
+letter-spacing:3px;
+
+margin-bottom:20px;
+
+}
+
+.cover h2{
+
+font-weight:normal;
+
+margin-bottom:40px;
+
+}
+
+.tagline{
+
+font-style:italic;
+
+color:#666;
+
+margin-top:20px;
+
+}
+
+/* ----------- typography ----------- */
+
+h2{
+
+font-size:26px;
+
+margin-top:0;
+
+margin-bottom:20px;
+
+}
+
+h3{
+
+margin-top:16px;
+
+}
+
+p{
+
+line-height:1.75;
+
+margin-bottom:16px;
+
+}
+
+ul,ol{
+
+line-height:1.7;
+
+padding-left:22px;
+
+}
+
+/* ----------- table of contents ----------- */
+
+.toc a{
+
+text-decoration:none;
+
+color:#333;
+
+}
+
+.toc a:hover{
+
+text-decoration:underline;
+
+}
+
+/* ----------- printing ----------- */
+
+@media print{
+
+body{
+background:white;
+}
+
+.document{
+gap:0;
+}
+
+.page{
+box-shadow:none;
+page-break-after:always;
+}
+
+}
+
+</style>
+
+<!-- GA -->
+
+<!-- GA -->
+
+</head>
+
+<body>
+
+<div class="document">
+
+<!-- COVER -->
+
+<div class="page cover">
+
+<h1>SLASHER</h1>
+
+<h2>A <i>Magic: The Gathering</i> format</h2>
+
+<p class="tagline">Play sleeved, or play Slasher.</p>
+
+<div class="footer2">
+<span>V1.0</span>
+</div>
+
+</div>
+
+<!-- TABLE OF CONTENTS -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h2>Table of contents</h2></br>
+
+<div class="toc">
+
+<p><a href="#1">1. Disclaimer</a></p>
+
+<p><a href="#2">2. Summary</a></p>
+
+<p><a href="#3">3. Manifesto</a></p>
+
+<p><a href="#4">4. Foundations</a></p>
+
+<p>&emsp;<a href="#41">4.1. What it is</a></p>
+
+<p>&emsp;<a href="#42">4.2. Who it was designed for</a></p>
+
+<p>&emsp;<a href="#43">4.3. What problem it solves</a></p>
+
+<p><a href="#5">5. Philosophy</a></p>
+
+<p>&emsp;<a href="#51">5.1. Base</a></p>
+
+<p>&emsp;<a href="#52">5.2. What the format encourages</a></p>
+
+<p>&emsp;<a href="#53">5.3. What the format discourages</a></p>
+
+<p>&emsp;<a href="#54">5.4. Match trophies</a></p>
+
+<p>&emsp;<a href="#55">5.5. Card history</a></p>
+
+<p><a href="#6">6. Rules</a></p>
+
+<p>&emsp;<a href="#61">6.1. Deck structure</a></p>
+
+<p>&emsp;<a href="#62">6.2. Match structure</a></p>
+
+</div>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- TABLE OF CONTENTS 2 -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h2>Table of Contents</h2></br>
+
+<div class="toc">
+
+<p>&emsp;<a href="#63">6.3. Valid cards</a></p>
+
+<p>&emsp;<a href="#64">6.4. Invalid cards</a></p>
+
+<p>&emsp;<a href="#65">6.5. Valid accessories</a></p>
+
+<p>&emsp;<a href="#66">6.6. Invalid accessories</a></p>
+
+<p><a href="#7">7. Ban list</a></p>
+
+<p><a href="#8">8. How to start</a></p>
+
+<p><a href="#9">9. Governance</a></p>
+
+<p>&emsp;<a href="#91">9.1. Who decides changes</a></p>
+
+<p>&emsp;<a href="#92">9.2. Review frequency</a></p>
+
+<p>&emsp;<a href="#93">9.3. How to submit suggestions</a></p>
+
+<p>&emsp;<a href="#94">9.4. How changes are announced</a></p>
+
+<p><a href="#10">10. Version history</a></p>
+
+</div>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- DISCLAIMER -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h2 id="1">1. Disclaimer</h2></br>
+
+<p>
+<i>Slasher</i> is a <i>Magic: The Gathering</i> format created by the community and is not official.
+</p>
+<p>
+This format has no affiliation, sponsorship, or endorsement from <i>Wizards of the Coast</i>.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- SUMMARY -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h2 id="2">2. Summary</h2></br>
+
+<p>
+- Follows standard deck construction rules;
+</p>
+<p>
+- Cards are played without sleeves or protection;
+</p>
+<p>
+- The winner chooses a card from the defeated opponent's deck, and the opponent cannot prevent the choice;
+</p>
+<p>
+- The format encourages the use of inexpensive and accessible cards.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- MANIFESTO -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h2 id="3">3. Manifesto</h2></br>
+
+<p>
+Over time, the ecosystem of <i>Magic: The Gathering</i> has evolved into an increasingly protected environment.
+</p>
+<p>
+Sleeves, playmats, and cases have turned cards into objects that are almost untouchable.
+</p>
+<p>
+The <i>Slasher</i> format proposes the opposite: encouraging risk, improvisation, and the freedom to play without fear of actually using the cards.
+</p>
+<p>
+Extremely optimized decks may exist, but they do not represent the primary spirit of the format.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- FOUNDATIONS -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h2 id="4">4. Foundations</h2></br>
+
+<h3 id="41">4.1. What it is</h3>
+
+<p>
+<i>Slasher</i> is a casual <i>Magic: The Gathering</i> format built on the premise that cards exist to be played. The experience of the match is more important than the perfect preservation of the cards.
+</p>
+<p>
+For this reason, the format prohibits the use of accessories that protect cards during gameplay, such as sleeves or playmats. The natural wear of the cards is part of the format’s experience.
+</p>
+<p>
+In the <i>Slasher</i> format, at the end of a match, the winner chooses one card from the defeated opponent’s deck.
+</p>
+<p>
+This rule has a fundamental purpose: to naturally keep the average value of cards used in the format low.
+</p>
+<p>
+Since any card used in a match may be lost, players tend to avoid using extremely expensive or difficult-to-replace cards. This risk creates a natural economic mechanism that encourages the use of more accessible cards.
+</p>
+<p>
+In other words, the risk of loss itself functions as a balancing system for the format.
+</p>
+<p>
+If a card becomes too powerful or dominant, its demand tends to increase, raising its price. As the card’s value rises, the risk of using it in <i>Slasher</i> matches also increases, discouraging its use.
+</p>
+<p>
+This cycle creates an environment where the power of cards and their economic value tend to balance naturally.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- FOUNDATIONS 2 -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h3 id="42">4.2. Who it was designed for</h3>
+
+<p>
+The <i>Slasher</i> format was created for players who want to experience <i>Magic: The Gathering</i> in a more accessible way, with less dependence on financial investment.
+</p>
+
+<p>
+It is especially intended for:
+</p>
+<p>
+- Casual players: People who want to play in a relaxed way without worrying about preserving cards.
+</p>
+<p>
+- New players: Players who are just starting the game and have small collections.
+</p>
+<p>
+- Players with unused cards: The <i>Slasher</i> format creates an environment where rarely used cards can regain strategic relevance.
+</p>
+<p>
+- Local communities: Groups of friends or stores that want to create a more inclusive play environment.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- FOUNDATIONS 3 -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h3 id="43">4.3. What problem it solves</h3>
+
+<p>
+As <i>Magic: The Gathering</i> has grown, many formats have begun to require increasingly higher investments in order to compete on equal terms.
+</p>
+<p>
+This creates challenges such as:
+</p>
+<p>
+- Financial barriers to entry;
+</p>
+<p>
+- Inequality between decks based on economic value.
+</p>
+<p>
+<i>Slasher</i> seeks to mitigate these problems by naturally encouraging the use of more accessible cards.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- PHILOSOPHY -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h2 id="5">5. Philosophy</h2></br>
+
+<h3 id="51">5.1. Foundation</h3>
+
+<p>
+The <i>Slasher</i> format is based on the idea that cards are game tools. By removing physical protection, the format encourages players to explore accessible cards and reduces the incentive to use highly valuable ones.
+</p>
+<p>
+The <i>Slasher</i> format values:
+</p>
+<p>
+- Creativity;
+</p>
+<p>
+- Experimentation;
+</p>
+<p>
+- Accessibility;
+</p>
+<p>
+- Social interaction.
+</p>
+<p>
+More than a set of rules, the <i>Slasher</i> format proposes a different way of relating to the game.
+</p>
+
+<h3 id="52">5.2. What the format encourages</h3>
+
+<p>
+The <i>Slasher</i> format encourages:
+</p>
+<p>
+- Creativity in deckbuilding;
+</p>
+<p>
+- Use of accessible cards;
+</p>
+<p>
+- Experimentation and strategic diversity;
+</p>
+<p>
+- Player interaction;
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- PHILOSOPHY 2 -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h3 id="53">5.3. What the format discourages</h3>
+
+<p>
+The <i>Slasher</i> format naturally discourages:
+</p>
+<p>
+- The use of high-value cards;
+</p>
+<p>
+- Dependence on expensive staples;
+</p>
+<p>
+- Excessive focus on collection preservation.
+</p>
+
+<h3 id="54">5.4. Match trophies</h3>
+
+<p>
+In the <i>Slasher</i> format, cards won in matches can become true gameplay trophies.
+</p>
+<p>
+By winning a match and choosing a card from the opponent, the player takes with them not only a game piece, but also a memory of the match that took place.
+</p>
+<p>
+Over time, decks may begin to contain cards won in different matches, creating unique stories for each player.
+</p>
+
+<h3 id="55">5.5. Card history</h3>
+
+<p>
+Some players may choose to record the origin of cards by writing information directly on the card they won, such as:
+</p>
+
+<p>
+- When the card was won;
+</p>
+<p>
+- Which player it came from;
+</p>
+<p>
+- In which match it was obtained.
+</p>
+<p>
+This practice is not mandatory, but it represents the spirit of the format well.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- RULES -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h2 id="6">6. Rules</h2></br>
+
+<h3 id="61">6.1. Deck structure</h3>
+
+<p>
+- Minimum of 60 cards;
+</p>
+<p>
+- Up to 4 copies of the same card, except basic lands;
+</p>
+<p>
+- Optional sideboard of up to 15 cards.
+</p>
+
+<h3 id="62">6.2. Match structure</h3>
+
+<p>
+Matches are played as best-of-three games (Bo3), following the traditional rules of <i>Magic: The Gathering</i>.
+</p>
+<p>
+After the match ends, the defeated player must allow the winner to examine their deck and sideboard in order to choose the won card.
+</p>
+<p>
+The winner chooses the card freely. The opponent cannot prevent the choice.
+</p>
+<p>
+It is not allowed to:
+</p>
+<p>
+- Hide cards;
+</p>
+<p>
+- Remove cards from the deck before the choice;
+</p>
+<p>
+- Reorganize the deck to make the choice more difficult.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- RULES 2 -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h3 id="63">6.3. Valid cards</h3>
+
+<p>
+All cards from all <i>Magic: The Gathering</i> sets are valid in the <i>Slasher</i> format, except those listed in section 6.4 Invalid Cards.
+</p>
+
+<h3 id="64">6.4. Invalid cards</h3>
+
+<p>
+The following are not allowed:
+</p>
+<p>
+- Proxies: The goal of the format is to keep cards with low values in decks; proxies could discourage this practice.
+</p>
+<p>
+- Gold-bordered cards: These are generally staple cards with more accessible values, which would influence deck construction.
+</p>
+<p>
+- Foil cards: Forbidden because they may create unintentional visual markings in the deck.
+</p>
+<p>
+Cards that are scribbled on, bent, or altered in a way that makes them easily identifiable while in the deck are also not allowed.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- RULES 3 -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h3 id="65">6.5. Valid accessories</h3>
+
+<p>
+Accessories that do not physically protect cards during gameplay are allowed, such as:
+</p>
+<p>
+- Dice;
+</p>
+<p>
+- Markers;
+</p>
+<p>
+- Life counters;
+</p>
+<p>
+- Tokens;
+</p>
+<p>
+- Life tracking apps.
+</p>
+<p>
+- Deckboxes or containers may be used for storage outside of matches.
+</p>
+
+<h3 id="66">6.6. Invalid accessories</h3>
+
+<p>
+Accessories that protect cards during gameplay are not allowed:
+</p>
+<p>
+- Sleeves;
+</p>
+<p>
+- Double sleeves;
+</p>
+<p>
+- Shields;
+</p>
+<p>
+- Playmats.
+</p>
+<p>
+The only protection allowed is the use of gloves by players, if they wish.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- BANLIST -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h2 id="7">7. Ban list</h2></br>
+
+<p>
+The <i>Slasher</i> format currently does not have a list of banned cards.
+</p>
+<p>
+The philosophy of the format is based on the principle that its own rules act as a natural balancing mechanism.
+</p>
+<p>
+If a card becomes too strong in the format:
+</p>
+<p>
+- Its popularity increases;
+</p>
+<p>
+- Its demand grows;
+</p>
+<p>
+- Its market value tends to rise.
+</p>
+<p>
+As the card's value increases, players tend to avoid using it, since it may be lost or damaged during matches.
+</p>
+<p>
+In this way, the card market itself can act as a form of metagame self-regulation.
+</p>
+<p>
+If necessary, a ban list may be introduced in the future.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- START -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h2 id="8">8. How to start</h2></br>
+
+<p>
+- Build a deck with the cards you have available;
+</p>
+<p>
+- Avoid cards with high financial value;
+</p>
+<p>
+- Find another player willing to take the risk;
+</p>
+<p>
+- Play a match;
+</p>
+<p>
+- The winner takes one card.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- GOVERNANCE -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h2 id="9">9. Governance</h2></br>
+
+<h3 id="91">9.1. Who decides changes</h3>
+
+<p>
+The <i>Slasher</i> format does not have a formal committee. Changes are conducted by the maintainer of this document.
+</p>
+
+<h3 id="92">9.2. Review frequency</h3>
+
+<p>
+There is no fixed review schedule. Changes are made as necessary.
+</p>
+
+<h3 id="93">9.3. How to send suggestions</h3>
+
+<p>
+Suggestions can be sent to <i>slashermagic@gmail.com</i>
+</p>
+
+<h3 id="94">9.4. How changes are announced</h3>
+
+<p>
+All changes to the <i>Slasher</i> format are published through updates to this document.
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+<!-- VERSION -->
+
+<div class="page">
+
+<div class="header">
+<span>SLASHER - WHITEPAPER - V1.0</span>
+</div>
+
+<h2 id="10">10. Version history</h2></br>
+
+<p>
+V1.0</br>
+Date: March 2026</br>
+Changes: First public version of the <i>Slasher</i> format.</br>
+</p>
+
+<div class="footer">
+<span>394ba286</span>
+<span class="page-number"></span>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
+
